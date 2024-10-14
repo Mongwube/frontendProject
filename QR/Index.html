@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="qr.css">
+    <style>
+        /* Reset some default styles */
+        body, h1, p, input, button {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Basic styling for the body */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Container for the content */
+        .content {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        /* Styling for the header */
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Styling for the paragraph */
+        p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Styling for the input field */
+        input[type="url"] {
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        /* Focus state for the input field */
+        input[type="url"]:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Styling for the button */
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        /* Hover state for the button */
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Active state for the button */
+        button:active {
+            background-color: #004494;
+        }
+
+        /* Styling for the image container */
+        #imgBox {
+            margin-top: 20px;
+            display: none; /* Initially hidden */
+        }
+
+        #qrImg {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>QR Code Generator</h1>
+        <p>Enter a URL below to generate your custom QR code.</p>
+        <input type="url" name="url" id="url" placeholder="Enter URL here">
+        <button onclick="generateQr()" id="generateBtn">Generate</button>
+        <div id="imgBox">
+            <img id="qrImg" src="" alt="Your QR Code will appear here">
+        </div>
+    </div>
+    <script>
+        const urlInput = document.getElementById('url');
+        const imgBox = document.getElementById('imgBox');
+        const qrImg = document.getElementById('qrImg');
+
+        function generateQr() {
+            if (urlInput.value.trim() !== "") {
+                qrImg.src = 'http://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(urlInput.value) + '&size=200x200';
+                imgBox.style.display = 'block'; // Show the QR code
+            } else {
+                alert("Please enter a valid URL.");
+            }
+        }
+    </script>
+</body>
+</html>
